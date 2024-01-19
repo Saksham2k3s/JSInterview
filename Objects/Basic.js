@@ -49,3 +49,29 @@ console.log(dynamic);
 for(key in data){
     console.log(key);
 }
+
+// What is destructuring in objects ?
+
+// Destructuring in JavaScript is a way to extract values from arrays 
+// or properties from objects into distinct variables. It provides a more 
+// concise syntax for assigning values to variables, making code cleaner and more 
+// readable.
+
+let obj3 = {
+ name : "Saksham",
+ age : 20,
+ fullname : {
+    first : "saksham",
+    last : "shrivastava"
+ }
+}
+
+const { name } = obj3
+
+console.log(name);
+
+// How to do destructuring in nested object
+
+const { fullname:{last} } = obj3
+
+console.log(last);

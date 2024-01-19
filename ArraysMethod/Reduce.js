@@ -2,6 +2,11 @@
 // reduce method is used to reduce the array to a single value
 // by applying function to each element of array
 
+// What is Accumulator
+// an accumulator is a variable that is used to accumulate or aggregate 
+// values during the process of reducing or folding a collection (such as an array or 
+// a list) into a single value.
+
 // reduce function takes callback function and this callback
 // function takes 4 arguments 
 // 1. accumulator, 2. current element, 3. current index, 4. the actual array

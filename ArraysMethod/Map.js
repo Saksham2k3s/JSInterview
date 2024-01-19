@@ -16,16 +16,32 @@ console.log(mul);
 
 // polyfill for map (making from scratch)
 
-Array.prototype.myMap = function (cb) {       // Adds myMap method to the Array prototype in the current file.
-    let newArr = [];
-    for (let i = 0; i < this.length; i++) {   // this refers to the parent array
-        newArr.push(cb(this[i], i, this));
-    }
-    return newArr;
+// Array.prototype.myMap = function (cb) {       // Adds myMap method to the Array prototype in the current file.
+//     let newArr = [];
+//     for (let i = 0; i < this.length; i++) {   // this refers to the parent array
+//         newArr.push(cb(this[i], i, this));
+//     }
+//     return newArr;
+// }
+
+// const polyfillarr = num.myMap((ele, i, num) => {
+//     return ele * 3;
+// })
+
+// console.log(polyfillarr);
+
+Array.prototype.myMap = function(cb){
+  let temp = [];
+  for(let i = 0; i < this.length; i++){
+     temp.push(cb(this[i], i, this))
+  }
+  return temp;
 }
 
-const polyfillarr = num.myMap((ele, i, num) => {
-    return ele * 3;
+
+const myNewMapArray = num.myMap((ele, idx, num)=> {
+      return ele * 3;
 })
 
-console.log(polyfillarr);
+console.log('This is my own map method');
+console.log(myNewMapArray);

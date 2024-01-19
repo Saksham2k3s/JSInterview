@@ -43,3 +43,15 @@ console.log(evalute("oop")(5)(6));
 
  console.log("Infinite Curring");
  console.log(add(2)(3)(4)(5)(6)(7)(8)(9)());
+
+ // Q.4 Give me real world example of curring
+
+ // We can use Curring to manipulating dom as well 
+
+ function UpdateElementText(id){
+  return function(text){
+    document.querySelector("#" + id).textContent = text; 
+  }
+ }
+
+ UpdateElementText("heading")("This is Saksham 1 2 3 4 5");

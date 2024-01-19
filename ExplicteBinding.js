@@ -15,8 +15,12 @@ function greet() {
   const person = {
     name: 'John',
   };
+
+  const person2 = {
+    name : 'Saksham'
+  }
   
-  greet.call(person); // Output: Hello, John!
+  greet.call(person2); // Output: Hello, John!
 
   //In this example, call is used to invoke the greet 
   // function and explicitly bind this to the person object. 

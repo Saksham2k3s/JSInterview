@@ -22,15 +22,17 @@ var b = 10;
 // What is temp Deadzone ?
 // temp deadzone is term to  describe state where where variable are 
 // are in the scope but not intialaize yet!
-function abcd(){
-    
-    console.log(a,b,c);
-    var a = 30;
-    const b = 10
-    let c = 20
-    
-}
 
-abcd()
+
+// function abcd(){
+    
+//     console.log(a,b,c);
+//     var a = 30;
+//     const b = 10
+//     let c = 20
+    
+// }
+
+// abcd()
 
 
