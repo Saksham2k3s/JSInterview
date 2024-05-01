@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: rgba(0, 0, 0, 0.728); color: white;" >
+    <div class="main-box" id="main-container" >
+        <h1>This is my DOM learning</h1>
+        <p>
+           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, sequi corporis pariatur velit aperiam assumenda, nihil possimus repudiandae maiores officiis odit. Rerum obcaecati, nihil laudantium corporis in illo commodi maiores.
+        </p>
+        <button id="btn" >Click me</button>
+
+        <ul>
+            <li>Hii</li>
+            <li>Hii</li>
+            <li>Hii</li>
+            <li>Hii</li>
+        </ul>
+    </div>
+
+    <script>
+    //geting the elements by the id
+
+    // console.log(document.getElementById('main-box').id);
+    // console.log(document.getElementById('main-box').className);
+
+    //Getting the elements by attributes
+
+    // console.log(document.getElementById('main-container').getAttribute('id'));
+    // console.log(document.getElementById('main-container').getAttribute('class'));
+
+     //Setting the attributes
+
+    //  console.log(document.getElementById('main-container').setAttribute('class', 'round-box main-box'));
+
+    //Giving style
+
+    const mainBox = document.getElementById('main-container');
+    // mainBox.style.background = 'red';
+    // mainBox.style.padding = '20px'
+
+    //Adding content
+
+    // console.log(mainBox.innerHTML);
+    // console.log(mainBox.textContent);
+    // console.log(mainBox.innerText);
+
+    //QuerySelector
+    
+    // console.log(document.querySelector('h1')); //This will give the first h1 tag of the page
+    // console.log(document.querySelector('#main-container')); 
+    // console.log(document.querySelector('.main-box')); 
+
+    //QuerySelector
+
+    const list = document.querySelectorAll('li')
+    list.forEach((list) => {
+        list.style.backgroundColor = 'green',
+        list.style.margin = '12px',
+        list.style.padding = '20px'
+    })
+    </script>
+</body>
+</html>

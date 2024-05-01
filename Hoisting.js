@@ -8,11 +8,11 @@
 
 //a declaretion move to top that why it will not give error
 a = 10;
-console.log(a);
+console.log(a);   //output  = 10;
 var a;
 
 //it will show the undefined coze only declration move to top not intialisation
-console.log(b);
+console.log(b); //output = undefined;
 var b = 10;
 
 // var hoisting is deffernt form const and let varibles 
@@ -20,7 +20,7 @@ var b = 10;
 // initialaization 
 // They will hoisted to temp deadzone not like a variable
 // What is temp Deadzone ?
-// temp deadzone is term to  describe state where where variable are 
+// temp deadzone is term to  describe state where variable are 
 // are in the scope but not intialaize yet!
 
 

@@ -33,12 +33,12 @@ displaySum(sum);
 // Q.4 What is IIFE ?
 // IIFE is stand for imedeatly invoked function expressions 
 (function mul(num){
-    console.log(num * num);
-})(8);
+  return num * num;
+})()
 
 // Q.5 What will the output of this code ?
 
-(function (x){                              // The output of this code is one coze first it search x for inner
+(function (x){       // x = 1                       // The output of this code is one coze first it search x for inner
  return (function (y){ 
     const x = 9;                     // sope but when it unable to search in inner block it will search for
   console.log(x);                           // outside block 

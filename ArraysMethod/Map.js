@@ -33,15 +33,14 @@ console.log(mul);
 Array.prototype.myMap = function(cb){
   let temp = [];
   for(let i = 0; i < this.length; i++){
-     temp.push(cb(this[i], i, this))
+    temp.push(cb(this[i], i, this));
   }
   return temp;
 }
 
 
-const myNewMapArray = num.myMap((ele, idx, num)=> {
-      return ele * 3;
+const myNewMap  = num.myMap((ele, idx, arry) => {
+      return ele * ele;
 })
 
-console.log('This is my own map method');
-console.log(myNewMapArray);
+console.log("This is my nslfks", myNewMap);
