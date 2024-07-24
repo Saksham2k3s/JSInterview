@@ -20,3 +20,31 @@ func1(4)(7);
 // Thier are various reasones for using curring 
 // 1. To make heigher order functions 2. To avoid passing same argument again and agian
 
+
+function sum(a){
+    return function(b){
+        return function(c){
+            console.log("The sum is ", a + b + c);
+        }
+    }
+}
+
+sum(2)(4)(6);
+
+// function multipy(num1, num2, num3){
+//    return num1 * num2 * num3;
+// }
+
+function multiply(a){
+  return function(b){
+    return function(c){
+        return a*b*c;
+    }
+  }
+}
+
+const mul = multiply(2)(3)(4);
+
+console.log("This is our multiply", mul);
+
+

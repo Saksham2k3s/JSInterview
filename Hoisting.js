@@ -35,4 +35,39 @@ var b = 10;
 
 // abcd()
 
+// c = 100;
+// console.log(c);
+
+// let c = 40;
+
+
+//Question no 5
+
+console.log("Question no 5");
+
+variable = 10;
+
+(function fun(){
+    foo = 100;
+    console.log(variable);
+    var foo = 20;
+    variable = 10;
+    console.log(variable);
+})();
+
+console.log(variable);
+
+console.log(typeof typeof "stirng");
+console.log(typeof Boolean);
+
+
+//Functions property
+
+function add(a, b){
+    return a+b;
+}
+
+console.log(add.length); //show the number of params it is getting;
+
+console.log(add.name); // Give the name of function
 

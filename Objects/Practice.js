@@ -118,3 +118,13 @@ console.log(d.greeting);  // d.greeting will also show the Hello because we are 
 
 console.log({a : 1} == {a : 1});
 console.log({a : 1} == {a : 1});  // They will give false because object are only same when they are refering to same space in memory
+
+
+const obj6 = {
+   name : "saksham",
+   age : 21,
+}
+
+for(key in obj6){
+    console.log(key, obj6[key]);
+}

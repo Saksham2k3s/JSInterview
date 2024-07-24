@@ -21,16 +21,28 @@ sum(3)(4)(5);
 function evalute(oper){
   return function(a){
     return function(b){
-        if(oper == "sum") return a+b;
-        else if(oper == "sub") return a-b;
-        else if(oper == "mul") return a*b;
-        else if(oper == "div") return a/b;
-        else return "Invelid operation";
+        // if(oper == "sum") return a+b;
+        // else if(oper == "sub") return a-b;
+        // else if(oper == "mul") return a*b;
+        // else if(oper == "div") return a/b;
+        // else return "Invelid operation";
+        switch(oper){
+          case "sum":
+            return a+b;
+          case 'sub':
+           return a-b;
+          case 'mul':
+            return a*b;
+          case 'div':
+            return a/b;
+          default:
+            return 'You have give me wrong input';
+        }
     }
   }
 }
 
-console.log(evalute("oop")(5)(6));
+console.log(evalute("mul")(5)(6));
 
 // Q.3 Infinite Curring
 
@@ -48,10 +60,14 @@ console.log(evalute("oop")(5)(6));
 
  // We can use Curring to manipulating dom as well 
 
- function UpdateElementText(id){
-  return function(text){
-    document.querySelector("#" + id).textContent = text; 
-  }
- }
+//  function UpdateElementText(id){
+//   return function(text){
+//     document.querySelector("#" + id).textContent = text; 
+//   }
+//  }
 
- UpdateElementText("heading")("This is Saksham 1 2 3 4 5");
+//  UpdateElementText("heading")("This is Saksham 1 2 3 4 5");
+
+ 
+
+ 

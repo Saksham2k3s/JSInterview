@@ -75,3 +75,12 @@ console.log(name);
 const { fullname:{last} } = obj3
 
 console.log(last);
+
+const persone3 = {
+    age : 22,
+    name : 'Ansh'
+}
+
+const persone4 = persone3
+
+console.log(persone3 === persone4);

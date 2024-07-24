@@ -19,32 +19,32 @@ console.log("Finish");
 
 // Example 2
 
-// function getMessage(username){
-//     setTimeout(() => {
-//         return `this is  ${username}`;  
-//     }, 1000);
-// }
-
-
-// const message = getMessage("saksham");
-// console.log(message);  
-// console.log('stop');
-
-// this will print undefined in the log because getMessage func is asyncronous function and 
-// run after 1 s. to resolve this we can use callback
-
-function getMessage(username, cb){
+function getMessage(username){
     setTimeout(() => {
-     cb(`This is ${username}`)
+        return `this is  ${username}`;  
     }, 1000);
 }
 
 
- getMessage("saksham", function cb(message){
-    console.log(message);
-});
-
+const message = getMessage("saksham");
+console.log(message);  
 console.log('stop');
+
+// this will print undefined in the log because getMessage func is asyncronous function and 
+// run after 1 s. to resolve this we can use callback
+
+// function getMessage(username, cb){
+//     setTimeout(() => {
+//      cb(`This is ${username}`)
+//     }, 1000);
+// }
+
+
+//  getMessage("saksham", function cb(message){
+//     console.log(message);
+// });
+
+// console.log('stop');
 
 // Promise Question
 
@@ -61,3 +61,59 @@ promise.then((res)=>{
 }).catch((error) => {
     console.log(error);
 })
+
+
+const firstPromiseFunction = () => {
+   return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        console.log("First promise is resolved now!");
+        resolve();
+      }, 2000);
+   }) 
+}
+
+const secondPromiseFunction = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+        console.log("Second promise is resolved now!");
+        resolve();
+        }, 2000);
+    })
+}
+
+const ThirdPromiseFunction = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+        console.log("Thired promise is rejected now!");
+        reject();
+        }, 2000);
+    })
+}
+
+
+firstPromiseFunction().then(() => {
+   return secondPromiseFunction()
+}).then(() => {
+   return ThirdPromiseFunction()
+}).catch(() => {
+    console.log("I am rejected!");
+})
+
+
+var promise1 = new Promise(function (resolve, reject) {
+    setTimeout(resolve, 500, "one");
+  });
+  var promise2 = new Promise(function (resolve, reject) {
+    setTimeout(reject, 100, "two");
+  });
+
+
+  
+  Promise.race([promise1, promise2]).then(function (value) {
+    console.log("Value is resolved with val", value); // "two" // Both promises will resolve, but promise2 is faster
+  }).catch((error) => {
+      console.log("Promise is rejected noew",error);
+  });
+
+
+

@@ -35,3 +35,46 @@ class a {    // inside the class the this refer to all the thing inside the cons
 
 const aa = new a("Saksham")
 console.log(aa);
+
+const obj = {
+  name : "Saksham",
+  obj2 : {
+    name : "Sakshi",
+    getName : function() {
+      return innerFunc = () => {
+          console.log(this.name);
+      }
+    }
+  }
+}
+
+obj.obj2.getName()();
+
+
+const cal = {
+  total : 0,
+  add(a){
+   this.total = this.total + a;
+   return this;
+  },
+
+  sub(a){
+    this.total = this.total - a;
+    return this
+  },
+
+  mul(a){
+    this.total = this.total * a;
+    return this
+  },
+
+  div(a){
+    this.total = this.total / a;
+    return this;
+  }
+
+}
+
+cal.add(3).add(6);
+
+console.log(cal.total);
