@@ -17,14 +17,14 @@ let count = 0;
 // addSix(15)          return 21
 
 
-function createBase(num){
+function createBase(num1){
     return function (num2){
-        return num + num2;
+        return num1 + num2;
     }
 }
 
 var addSix = createBase(6);
-console.log(addSix(10) );        
+console.log(addSix(10));        
 console.log(addSix(15)); 
 
 

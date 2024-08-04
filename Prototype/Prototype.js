@@ -102,3 +102,5 @@ myName.trueLength();
 myCity.trueLength();
 myCountry.trueLength();
 myArr.trueLength();
+
+console.log("Current date => ", new Date().toLocaleString());

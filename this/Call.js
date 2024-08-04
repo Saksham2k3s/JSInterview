@@ -13,11 +13,12 @@
 
 obj = {name : "Saksham"};
 
-function sayHello(age){
+function sayHello(...age){
+    console.log(age);
     return "Hello my name is " + this.name + "he is " + age;
 }
 
-console.log(sayHello.call(obj, 24)); // the call method takes two argumenst one is object and 
+console.log(sayHello.call(obj, 24, 44, "saksham")); // the call method takes two argumenst one is object and 
 // second is argument that we want to pass inside the function
 
 

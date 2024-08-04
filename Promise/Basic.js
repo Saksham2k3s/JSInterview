@@ -9,8 +9,8 @@
 // When the code exitute line by line then it is called the synchronous code
 // when the code will not run by line then it is called the aysnchronous code for ex
 
-console.log("Start");
 
+console.log("Start");
 setTimeout(() => {
      console.log("This is timer");  // After 1 sec we will get "This is timer"
 }, 1000);
@@ -21,14 +21,19 @@ console.log("Finish");
 
 function getMessage(username){
     setTimeout(() => {
+        console.log(`this is ${username}!`);
         return `this is  ${username}`;  
     }, 1000);
 }
 
 
-const message = getMessage("saksham");
+ const print = async () => {
+const message = await getMessage("saksham");
 console.log(message);  
 console.log('stop');
+ }
+
+ print()
 
 // this will print undefined in the log because getMessage func is asyncronous function and 
 // run after 1 s. to resolve this we can use callback
@@ -102,10 +107,10 @@ firstPromiseFunction().then(() => {
 
 var promise1 = new Promise(function (resolve, reject) {
     setTimeout(resolve, 500, "one");
-  });
+});
   var promise2 = new Promise(function (resolve, reject) {
     setTimeout(reject, 100, "two");
-  });
+});
 
 
   

@@ -38,9 +38,9 @@ displaySum(sum);
 
 // Q.5 What will the output of this code ?
 
-(function (x){       // x = 1                       // The output of this code is one coze first it search x for inner
+(function (x){                            // The output of this code is one coze first it search x for inner x = 1
  return (function (y){ 
-    const x = 9;                     // sope but when it unable to search in inner block it will search for
+    const x = 9;                            // sope but when it unable to search in inner block it will search for
   console.log(x);                           // outside block 
  })(2);
 })(1);

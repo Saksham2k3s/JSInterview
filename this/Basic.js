@@ -39,7 +39,7 @@ console.log(aa);
 const obj = {
   name : "Saksham",
   obj2 : {
-    name : "Sakshi",
+    name : "Sakshi Shrivastava",
     getName : function() {
       return innerFunc = () => {
           console.log(this.name);
@@ -75,6 +75,7 @@ const cal = {
 
 }
 
-cal.add(3).add(6);
+cal.add(3);
+cal.add(5);
 
 console.log(cal.total);

@@ -30,17 +30,17 @@ console.log(mul);
 
 // console.log(polyfillarr);
 
-Array.prototype.myMap = function(cb){
-  let temp = [];
-  for(let i = 0; i < this.length; i++){
-    temp.push(cb(this[i], i, this));
-  }
-  return temp;
+Array.prototype.myMap = function(cb) {
+     let temp = [];
+     for(let i = 0; i < this.length; i++){
+        const square = cb(this[i], i);
+        temp.push(square);
+     }
+     return temp;
 }
 
+let ans = num.myMap((ele, idx) => {
+    return ele * ele;
+});
 
-const myNewMap  = num.myMap((ele, idx, arry) => {
-      return ele * ele;
-})
-
-console.log("This is my nslfks", myNewMap);
+console.log("this is my map",ans);

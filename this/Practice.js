@@ -51,7 +51,7 @@ const calculator = {
     }
 }
 
-// calculator.read();  // it will two numbers form user
+// calculator.read();  // it will read two numbers form user
 // calculator.sum();   // it will add two numbers
 // calculator.mul();   // it will multiply two numbers
 
@@ -62,11 +62,13 @@ const obj2 = {
 }
 
 function sayHello(){
+    console.log("h9999");
     console.log(this.name);
 }
 
 console.log(sayHello.call(obj2));
-console.log(sayHello.bind(obj2)); // bind method will return the sayHello function
+const a = sayHello.bind(obj2); // bind method will return the sayHello function
+
 
 // Q.6 Call printAnimals such that it print all the animals in the object
 
@@ -112,3 +114,16 @@ function f(){
 f = f.bind({name : "Mohan"}).bind({name : "Sohan"});
 
 f()  // if a function is bind with a function after that we can't bind it with another so it will give mohan
+
+const obj3 = {
+    name : "Saksham",
+    innerOnj : {
+        name : "Sakshi",
+        meth : () => {
+            console.log("This is my question");
+            console.log(this);
+        }
+    }
+}
+
+obj3.innerOnj.meth()
