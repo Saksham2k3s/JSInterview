@@ -28,7 +28,7 @@ function getMessage(username){
 
 
  const print = async () => {
-const message = await getMessage("saksham");
+const message = getMessage("saksham");
 console.log(message);  
 console.log('stop');
  }

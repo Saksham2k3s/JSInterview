@@ -104,3 +104,5 @@ myCountry.trueLength();
 myArr.trueLength();
 
 console.log("Current date => ", new Date().toLocaleString());
+
+console.log("This is Object", Object);
