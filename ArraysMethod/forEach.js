@@ -8,3 +8,5 @@ const numbers = [1, 2, 3, 4];
 numbers.forEach((number) => {
   console.log(number);  // Prints each number in the array
 });
+
+console.log(numbers);
