@@ -4,6 +4,7 @@
 // captures variables from its outer scope, even after that outer 
 // scope has finished executing. This allows the function to access those captured 
 // variables later.
+// made change
 
 function outerFunction() {
     let outerVariable = 10;

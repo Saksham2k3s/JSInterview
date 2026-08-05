@@ -44,3 +44,18 @@ let ans = num.myMap((ele, idx) => {
 });
 
 console.log("this is my map",ans);
+
+Array.prototype.myMapFunc = function(cb) {
+    let temp = [];
+    for(let i = 0; i < this.length; i++) {
+        const newEle = cb(this[i], i, this);
+        temp.push(newEle);
+    }
+
+    return temp;
+}
+
+const array = [1,2,3,4,5];
+array.myMapFunc((ele, idx, array) => {
+   return ele * ele;
+})
