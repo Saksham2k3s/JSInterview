@@ -43,8 +43,6 @@ let ans = num.myMap((ele, idx) => {
     return ele * ele;
 });
 
-console.log("this is my map",ans);
-
 Array.prototype.myMapFunc = function(cb) {
     let temp = [];
     for(let i = 0; i < this.length; i++) {
@@ -59,3 +57,24 @@ const array = [1,2,3,4,5];
 array.myMapFunc((ele, idx, array) => {
    return ele * ele;
 })
+
+const newArray = [1,2,3,4,5];
+
+Array.prototype.polyMap = function(cb) {
+     const temp = [];
+
+     for(let i = 0; i < this.length; i++) {
+         const newEle = cb(this[i], i, this);
+         temp[i] = newEle;
+     }
+
+     return temp;
+}
+
+
+newArray.polyMap((ele, idx, array) => {
+    return ele * 2;
+});
+
+console.log('this is my own map array');
+
