@@ -71,3 +71,25 @@ console.log(evalute("mul")(5)(6));
  
 
  
+
+// Q.5 Generic Currying Implementation (Converts any fn(a, b, c) into curried fn)
+function curry(fn) {
+  return function curried(...args) {
+    if (args.length >= fn.length) {
+      return fn.apply(this, args);
+    } else {
+      return function (...moreArgs) {
+        return curried.apply(this, [...args, ...moreArgs]);
+      };
+    }
+  };
+}
+
+function calculateVolume(length, width, height) {
+  return length * width * height;
+}
+
+const curriedVolume = curry(calculateVolume);
+console.log("Generic Curry Volume (1)(2)(3):", curriedVolume(1)(2)(3));
+console.log("Generic Curry Volume (1, 2)(3):", curriedVolume(1, 2)(3));
+console.log("Generic Curry Volume (1)(2, 3):", curriedVolume(1)(2, 3));

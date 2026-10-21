@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM Event Propagation & Event Delegation</title>
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 20px; line-height: 1.6; }
+    .box { padding: 20px; border: 2px solid #333; margin: 10px 0; border-radius: 8px; }
+    #grandparent { background-color: #fee2e2; }
+    #parent { background-color: #fef3c7; }
+    #child { background-color: #d1fae5; cursor: pointer; }
+    #list { background: #e0e7ff; padding: 15px; border-radius: 8px; }
+    li { padding: 6px 12px; margin: 4px 0; background: white; border-radius: 4px; cursor: pointer; }
+    .log-panel { background: #1e1e1e; color: #4ade80; padding: 15px; border-radius: 8px; font-family: monospace; min-height: 100px; max-height: 200px; overflow-y: auto; }
+  </style>
+</head>
+<body>
+  <h1>DOM Event Bubbling, Capturing & Delegation Practice</h1>
+
+  <h2>1. Event Propagation (Bubbling vs Capturing)</h2>
+  <div id="grandparent" class="box">Grandparent
+    <div id="parent" class="box">Parent
+      <button id="child" class="box">Child Button (Click Me)</button>
+    </div>
+  </div>
+
+  <h2>2. Event Delegation</h2>
+  <p>Instead of attaching 100 event listeners to every list item, we attach 1 listener to the parent:</p>
+  <ul id="list">
+    <li data-id="1">Item 1 (Click me)</li>
+    <li data-id="2">Item 2 (Click me)</li>
+    <li data-id="3">Item 3 (Click me)</li>
+  </ul>
+  <button id="addItemBtn">Add New Dynamic Item</button>
+
+  <h3>Console Log:</h3>
+  <div id="log" class="log-panel"></div>
+
+  <script>
+    const logEl = document.getElementById("log");
+    function printLog(msg) {
+      logEl.innerHTML += `<div>> ${msg}</div>`;
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+
+    // --- Part 1: Event Bubbling & Capturing ---
+    const grandparent = document.getElementById("grandparent");
+    const parent = document.getElementById("parent");
+    const child = document.getElementById("child");
+
+    // Bubbling phase: 3rd argument is false (default)
+    grandparent.addEventListener("click", () => printLog("Grandparent clicked [Bubbling Phase]"), false);
+    parent.addEventListener("click", () => printLog("Parent clicked [Bubbling Phase]"), false);
+    child.addEventListener("click", (e) => {
+      printLog("Child clicked [Target Phase]");
+      // Uncomment to stop bubbling:
+      // e.stopPropagation();
+    }, false);
+
+    // Capturing phase (trickle down): 3rd argument is true
+    grandparent.addEventListener("click", () => printLog("Grandparent [Capturing Phase]"), true);
+    parent.addEventListener("click", () => printLog("Parent [Capturing Phase]"), true);
+
+    // --- Part 2: Event Delegation ---
+    const list = document.getElementById("list");
+    list.addEventListener("click", (event) => {
+      // event.target is the exact element clicked
+      const item = event.target.closest("li");
+      if (item && list.contains(item)) {
+        printLog(`Delegation Handled: Clicked ${item.innerText} (ID: ${item.dataset.id})`);
+      }
+    });
+
+    // Dynamic item added later automatically works with delegation!
+    let nextId = 4;
+    document.getElementById("addItemBtn").addEventListener("click", () => {
+      const li = document.createElement("li");
+      li.dataset.id = nextId;
+      li.innerText = `Dynamically added Item ${nextId++}`;
+      list.appendChild(li);
+      printLog("New item added to DOM dynamically");
+    });
+  </script>
+</body>
+</html>
+

@@ -1,179 +1,152 @@
+// =========================================================================
+// MASTER JAVASCRIPT POLYFILLS CHEATSHEET
+// Array, Function, Promise, Utilities & Timers
+// =========================================================================
 
-// Map Polyfill
-const myArr = [1,2,3,4];
-
-Array.prototype.myMap = function(cb){
-    let temp = [];
-
-    for(let i = 0; i < this.length; i++){
-        temp.push(cb(this[i], i, this));
+// -------------------------------------------------------------
+// 1. Array.prototype.myMap
+// -------------------------------------------------------------
+Array.prototype.myMap = function (callback, thisArg) {
+  if (typeof callback !== "function") throw new TypeError("Callback must be a function");
+  const result = [];
+  for (let i = 0; i < this.length; i++) {
+    if (i in this) {
+      result[i] = callback.call(thisArg, this[i], i, this);
     }
+  }
+  return result;
+};
 
-    return temp;
-}
-
-const maparr = myArr.myMap((ele, idx, arr) => {
-    return ele * ele;
-})
-
-console.log("This is my map polyfill", maparr);
-
-
-// Filter Method Polyfill
-
-
-Array.prototype.myFilter = function(cb){
-    const temp = [];
-   
-    for(let i = 0; i < this.length; i++){
-        if(cb(this[i], i, this)){
-            temp.push(this[i]);
-        }
+// -------------------------------------------------------------
+// 2. Array.prototype.myFilter
+// -------------------------------------------------------------
+Array.prototype.myFilter = function (callback, thisArg) {
+  if (typeof callback !== "function") throw new TypeError("Callback must be a function");
+  const result = [];
+  for (let i = 0; i < this.length; i++) {
+    if (i in this && callback.call(thisArg, this[i], i, this)) {
+      result.push(this[i]);
     }
-    return temp;
-}
+  }
+  return result;
+};
 
-const filterArr = myArr.myFilter((ele, idx, arr) => {
-    return ele > 2;
-})
+// -------------------------------------------------------------
+// 3. Array.prototype.myReduce
+// -------------------------------------------------------------
+Array.prototype.myReduce = function (callback, initialValue) {
+  if (typeof callback !== "function") throw new TypeError("Callback must be a function");
+  if (this.length === 0 && arguments.length < 2) {
+    throw new TypeError("Reduce of empty array with no initial value");
+  }
 
-console.log("This is my Filter polyfill", filterArr);
+  let accumulator = arguments.length >= 2 ? initialValue : this[0];
+  let startIndex = arguments.length >= 2 ? 0 : 1;
 
-
-// reduce method Polyfill
-
-Array.prototype.myReduce = function(cb, initialVal){
-    let accumlator = initialVal;
-    
-
-    for(let i = 0; i < this.length; i++){
-        accumlator = accumlator === undefined ? this[i] : cb(accumlator, this[i], i, this);
-         
+  for (let i = startIndex; i < this.length; i++) {
+    if (i in this) {
+      accumulator = callback(accumulator, this[i], i, this);
     }
+  }
+  return accumulator;
+};
 
-    return accumlator;
-}
+// -------------------------------------------------------------
+// 4. Function.prototype.myCall
+// -------------------------------------------------------------
+Function.prototype.myCall = function (context, ...args) {
+  if (typeof this !== "function") throw new TypeError(this + " is not callable");
+  context = context ?? globalThis;
+  context = Object(context);
+  const fnSymbol = Symbol("fn");
+  context[fnSymbol] = this;
+  const result = context[fnSymbol](...args);
+  delete context[fnSymbol];
+  return result;
+};
 
-const reduceArr = myArr.myReduce((ac, ele, idx, arr) => {
-        return ac * ele;
-})
+// -------------------------------------------------------------
+// 5. Function.prototype.myApply
+// -------------------------------------------------------------
+Function.prototype.myApply = function (context, args) {
+  if (typeof this !== "function") throw new TypeError(this + " is not callable");
+  context = context ?? globalThis;
+  context = Object(context);
+  const fnSymbol = Symbol("fn");
+  context[fnSymbol] = this;
+  const result = args ? context[fnSymbol](...args) : context[fnSymbol]();
+  delete context[fnSymbol];
+  return result;
+};
 
-console.log("This is my reduce", reduceArr);
+// -------------------------------------------------------------
+// 6. Function.prototype.myBind
+// -------------------------------------------------------------
+Function.prototype.myBind = function (context, ...initialArgs) {
+  if (typeof this !== "function") throw new TypeError(this + " is not callable");
+  const fn = this;
+  function bound(...laterArgs) {
+    const isNew = this instanceof bound;
+    return fn.apply(isNew ? this : context, [...initialArgs, ...laterArgs]);
+  }
+  if (fn.prototype) bound.prototype = Object.create(fn.prototype);
+  return bound;
+};
 
-
-// Polyfill for call
-
-const obj  = {
-    name : "Saksham",
-    age : 20
-}
-
-function myCallFun(){
-    console.log(`This is my call method polyfill and this is created by ${this.name}`);;
-}
-
-Function.prototype.myCall = function(context = {}, ...args){
-
-    if(typeof this !== 'function'){
-        throw new Error(this + 'is not callable');
-    }
-
-    context.fn = this;
-    context.fn(...args);
-}
-
-myCallFun.myCall(obj)
-
-
-// Polyfill for call
-
-debugger
-function myApplyFun(speed, message){
-    console.log(`This is my call method polyfill and this is created by ${this.name} speed ${speed}, message ${message}`);;
-}
-
-Function.prototype.myApply = function(context = {}, args){
-
-    if(typeof this !== 'function'){
-        throw new Error(this + 'is not callable');
-    }
-
-    if(!Array.isArray(args)){
-        throw new Error('This is not array'); 
-    }
-
-    context.fn = this;
-    context.fn(...args);
-}
-
-myApplyFun.myApply(obj, [200, 'code']);
-
-//setTimeout Polyfill
-
-function createSetTimeout(){
-   var timeId = 0;
-   var timeMap = {};
-   function setTimeoutPolyfill(cb, delay){
-      var id = timeId++;
-      timeId[id] = true;
-      var start = Date.now();
-      function triggerCallback(){
-        if(!timeMap[id]) return;
-        if(Date.now() > start + delay){
-            cb();
-        }else{
-            triggerCallback();
-        }
-      }
-
-      triggerCallback();
-      return id;
-   }
-
-   function clearSetTimeoutPolyfill(id){
-    delete timeId[id];
-   }
-
-   return { setTimeoutPolyfill, clearSetTimeoutPolyfill }
-}
-
-var { setTimeoutPolyfill, clearSetTimeoutPolyfill } = createSetTimeout();
-console.log('start');
-var myfun = setTimeoutPolyfill(function(){
-  console.log('I am set time out');
-},1);
-
-console.log('End');
-
-
-const promiseArray = [
-    Promise.resolve(3),
-    Promise.resolve(5),
-    Promise.resolve(10)
-]
-
-Promise.myPromiseAll = (promises) => {
+// -------------------------------------------------------------
+// 7. Promise.myAll
+// -------------------------------------------------------------
+Promise.myAll = function (promises) {
   return new Promise((resolve, reject) => {
-    const results = [];
-    let completedPromises = 0;
-
-    promises.forEach((promise, index) => {
-      promise.then((val) => {
-        results[index] = val; // Preserve the order of promises
-        completedPromises++;
-
-        if (completedPromises === promises.length) {
-          resolve(results); // Resolve the final results when all promises are done
-        }
-      }).catch((error) => {
-        reject(error); // If any promise rejects, reject the entire Promise.myPromiseAll
-      });
+    const items = Array.from(promises);
+    if (items.length === 0) return resolve([]);
+    const results = new Array(items.length);
+    let completed = 0;
+    items.forEach((p, idx) => {
+      Promise.resolve(p).then(
+        (val) => {
+          results[idx] = val;
+          if (++completed === items.length) resolve(results);
+        },
+        (err) => reject(err)
+      );
     });
   });
+};
+
+// -------------------------------------------------------------
+// 8. Custom setInterval using setTimeout
+// -------------------------------------------------------------
+function createCustomInterval() {
+  let idCounter = 0;
+  const map = new Map();
+
+  function mySetInterval(fn, delay, ...args) {
+    const id = ++idCounter;
+    function run() {
+      map.set(
+        id,
+        setTimeout(() => {
+          fn(...args);
+          if (map.has(id)) run();
+        }, delay)
+      );
+    }
+    run();
+    return id;
+  }
+
+  function myClearInterval(id) {
+    if (map.has(id)) {
+      clearTimeout(map.get(id));
+      map.delete(id);
+    }
+  }
+
+  return { mySetInterval, myClearInterval };
 }
 
-Promise.myPromiseAll(promiseArray).then((results) => {
-  console.log(results); // [3, 5, 10]
-}).catch((error) => {
-  console.log("Error in promise array:", error);
-});
+// Quick validation
+console.log("Map Polyfill:", [1, 2, 3].myMap((x) => x * 2)); // [2, 4, 6]
+console.log("Filter Polyfill:", [1, 2, 3, 4].myFilter((x) => x % 2 === 0)); // [2, 4]
+console.log("Reduce Polyfill:", [1, 2, 3, 4].myReduce((acc, x) => acc + x, 0)); // 10
